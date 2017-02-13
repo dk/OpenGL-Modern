@@ -50,8 +50,7 @@ before_script:
   - "export DISPLAY=:99.0"
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sh -e /etc/init.d/xvfb start; fi
   # from http://afitnerd.com/2011/09/06/headless-browser-testing-on-mac/
-  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then Xvfb :99 -ac -screen 0 1024x768x8 -extension GLX -kb &; fi
-  - "sh -e /etc/init.d/xvfb start"
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then Xvfb :99 -ac -screen 0 1024x768x8 -extension GLX; fi
   - sleep 3 # give xvfb some time to start
   #- coverage-setup
 script:
