@@ -1,0 +1,13 @@
+* This file contains working notes from XS code generation
+
+* utils/priority_xs/ Directory contents:
+
+  NOTES.txt - this file
+  glDeleteXxxx/ - directory with XS work for glDelete routines
+  glGenXxxx/ - directory with XS work for glGen routines
+  required-bad-csv.txt - annotations for priority "bad" routines with pointers
+
+* glDelete* and glGen* routines have the same calling convention save
+  that the glDelete takes a pointer to n object ids to be deleted while
+  glGen take a pointer argument to a buffer large enough to recieve n
+  generated object ids.
