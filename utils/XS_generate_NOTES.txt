@@ -86,4 +86,17 @@ GLEW include file declarations in glew.h.
   - First implementation will focus on functionality
   - Optimized routines to come or use specific _c routine
 
-
+* Plan of implementation for routines with pointer/array args:
+  - Basic implementation uses a ref-able type at the perl level
+    - objects: OpenGL::Array or PDL or TBD
+    - native refs: ARRAY, SCALAR, HASH where appropriate
+    - if appropriate, allow ARRAY to be @array if unambiguous
+    - baseline implementation assumes allocation before GL call
+      - consistent with OpenGL C API
+      - C documentation aligns with perl implementations
+      - there is a question of implementation for buffer mapping operations
+      - could add allocation but need to clarify what is needed to do
+    - How should input and output types be constrained?
+      - All the same
+      - Mix and match
+      - Other
