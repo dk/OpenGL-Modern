@@ -13,15 +13,16 @@ if ( $^O eq 'MSWin32' ) {
 } elsif ( $^O eq 'cygwin' ) {
   $libs = '-lGL -lX11';
 } elsif ( $^O eq 'darwin' ) {
-  $DYNS = { 'OTHERLDFLAGS' => '-framework OpenGL' };
-  $define .= " -Wno-compound-token-split-by-macro -DGL_SILENCE_DEPRECATION";
+  if ( $ENV{OGLM_APPLE_GLX} ) {
+     $define .= " -DGLEW_APPLE_GLX -I/opt/X11/include";
+     $libs = '-L/opt/X11/lib -lglut';
+  } else {
+     $DYNS = { 'OTHERLDFLAGS' => '-framework OpenGL' };
+     $define .= " -Wno-compound-token-split-by-macro -DGL_SILENCE_DEPRECATION";
+  }
 } else {
   $libs = '-lGL -lX11';
 }
-
-$define .= ' ' . $ENV{OGLM_ADD_DEFINE} if defined $ENV{OGLM_ADD_DEFINE};
-$libs   .= ' ' . $ENV{OGLM_ADD_LIBS} if defined $ENV{OGLM_ADD_LIBS};
-$DYNS->{OTHERLDFLAGS} = $ENV{OGLM_REPLACE_OTHERLDFLAGS} if defined $ENV{OGLM_REPLACE_OTHERLDFLAGS};
 
 my %buildargs = (
   !$libs ? () : (LIBS => $libs),
